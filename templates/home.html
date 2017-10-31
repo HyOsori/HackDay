@@ -16,11 +16,13 @@
         <div id="time_table">
 
         </div>
+        <h1>Awesome!</h1>
+        <button id="refresh_awesome_button">Refresh</button>
         <div id="awesome_contribute">
-            <button id="refresh_awesome_button">Refresh</button>
         </div>
+        <h1>Repository 진행 현황</h1>
+        <button id="refresh_repo_button">Refresh</button>
         <div id="repository_detail">
-            <button id="refresh_repo_button" >Refresh</button>
         </div>
     </div>
     <div id="side_bar">
@@ -34,5 +36,6 @@
 
 <!-- javascript -->
 {% block bottom %}
-<script src="{{ static_url('home.js') }}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{{ static_url('home.js') }}"></script>
 {% end %}

@@ -1,13 +1,16 @@
 import os
 
 import tornado.web
-import osorihack.view
+
+from osorihack.model.repository import ManagedInfo
 
 APP_NAME = "Osori_HackDay"
 
 
 class OsoriHack(tornado.web.Application):
     def __init__(self):
+        import osorihack.view
+
         self.handler = [
             (r"/", osorihack.view.IndexHandler),
             (r"/home", osorihack.view.HomeHandler),
@@ -22,7 +25,7 @@ class OsoriHack(tornado.web.Application):
             template_path=os.path.join(os.getcwd(), "templates"),
             static_path=os.path.join(os.getcwd(), "static"),
             cookie_secret="osorihackday",
-            debug=True
+            debug=True,
         )
 
         super(OsoriHack, self).__init__(self.handler, **self.settings)
