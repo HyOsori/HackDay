@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+<!-- css -->
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('login.css') }}" />
+{% end %}
+
+<!-- body html -->
+{% block body %}
+<form action="/login" method="post">
+    Name <input type="text" name="user_name"><br>
+    <input type="submit">
+</form>
+{% end %}
+
+<!-- javascript -->
+{% block bottom %}
+<script src="{{ static_url('login.js') }}" />
+{% end %}

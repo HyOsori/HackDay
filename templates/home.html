@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+<!-- css -->
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('home.css') }}"/>
+{% end %}
+
+<!-- body html -->
+{% block body %}
+<div id="header">
+    <h1>Osori HackDay</h1>
+</div>
+
+<div id="body">
+    <div id="contents_viewer">
+        <div id="time_table">
+
+        </div>
+        <div id="awesome_contribute">
+            <button id="refresh_awesome_button">Refresh</button>
+        </div>
+        <div id="repository_detail">
+            <button id="refresh_repo_button" >Refresh</button>
+        </div>
+    </div>
+    <div id="side_bar">
+
+    </div>
+
+</div>
+
+
+{% end %}
+
+<!-- javascript -->
+{% block bottom %}
+<script src="{{ static_url('home.js') }}"/>
+{% end %}
