@@ -9,6 +9,7 @@
 {% block body %}
 <div id="header">
     <h1>Osori HackDay</h1>
+    <h3 id="my_name">{{ current_user }}</h3>
 </div>
 
 <div id="body">
@@ -26,14 +27,18 @@
         </div>
     </div>
     <div id="side_bar">
+        <div id="chat_chat">
 
+        </div>
+
+        <input type="text" id="chat_box">
+        <button id="chat_send">chat send</button>
     </div>
 
 </div>
 
 
 {% end %}
-
 <!-- javascript -->
 {% block bottom %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

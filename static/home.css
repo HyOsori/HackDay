@@ -8,15 +8,32 @@
 #body {
     width: 100%;
     height: calc(100% - 100px);
-
-    max-height: 800px;
 }
 
 
 #side_bar{
     width: 300px;
-    height: 800px;
+    height: 500px;
     background-color: beige;
+
+    float: right;
+}
+
+#chat_chat {
+    height: 400px;
+    overflow: scroll;
+}
+
+#chat_box {
+    width: 75%;
+    height: 100px;
+
+    float: left;
+}
+
+#chat_send {
+    width: 20%;
+    height: 100px;
 
     float: right;
 }
@@ -29,11 +46,11 @@
 }
 
 #time_table {
-    height: 200px;
+    height: 100%;
 }
 
 #awesome_contribute {
-    height: 200px;
+    height: 100%;
 }
 
 #repository_detail {

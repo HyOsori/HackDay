@@ -18,6 +18,8 @@ class OsoriHack(tornado.web.Application):
 
             (r"/repo/([^/]+)/([^/]+)", osorihack.view.SearchRepositoryHandler),
             (r"/repo", osorihack.view.SearchRepositoryHandler),
+
+            (r"/chat", osorihack.view.ChatHandler),
         ]
 
         self.settings = dict(
