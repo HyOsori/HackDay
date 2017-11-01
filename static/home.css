@@ -58,6 +58,7 @@ nav li:hover, #top_btn:hover {
 }
 .contents_container {
     padding-bottom: 50px;
+    max-width: 930px;
 }
 .contents_title {
     font-size: 40px;
@@ -89,6 +90,30 @@ nav li:hover, #top_btn:hover {
 }
 #chat_chat .mychat {
     color: blue;
+}
+#notice_list {
+    padding: 0px;
+}
+#notice_list li {
+    list-style: none;
+    padding: 20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+#notice_list li:hover {
+    background-color: rgba(0,0,0,0.03);
+}
+#notice_list li p {
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+.notice_hidden {
+    display: none;
+}
+.notice {
 }
 /*
 #side_bar{
