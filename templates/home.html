@@ -8,8 +8,20 @@
 <!-- body html -->
 {% block body %}
 <div id="header">
-    <h1>Osori HackDay</h1>
-    <h3 id="my_name">{{ current_user }}</h3>
+    <img class="logo" src="{{ static_url('images/Logo.png') }}" width="70"/>
+    <h1 class="logo">OSORI</h1>
+    <h2 id="my_name">{{ current_user }}</h2>
+    <h1 id="title">OSORI HACKDAY</h1>
+    <div id="info">
+        <h1>1st: 2017.11.04 15:30 - 2017.11.05 9:30</h1>
+        <div id='timer'></div>
+    </div>
+    <nav>
+        <li>Notice</li>
+        <li>Awesome</li>
+        <li>Repository</li>
+        <li>TimeTable</li>
+    </nav>
 </div>
 
 <div id="body">
@@ -32,7 +44,7 @@
         </div>
 
         <input type="text" id="chat_box">
-        <button id="chat_send">chat send</button>
+        <button id="chat_send">send</button>
     </div>
 
 </div>
@@ -43,4 +55,5 @@
 {% block bottom %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="{{ static_url('home.js') }}"></script>
+<script src="{{ static_url('timer.js') }}"></script>
 {% end %}

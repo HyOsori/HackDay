@@ -2,6 +2,10 @@
  * Created by junsu on 2017-10-30.
  */
 
+window.onload = function() {
+    startclock();
+};
+
 console.log(window.location.host)
 
 var chatSocket = new WebSocket("ws://" + window.location.host + "/chat");

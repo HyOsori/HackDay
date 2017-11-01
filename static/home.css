@@ -1,40 +1,26 @@
 #header {
-    width: 100%;
-    height: 100px;
-
-    background-color: honeydew;
+    padding: 20px 50px 40px 50px;
+    min-width: 1080px;
+    background-color: rgba(0,0,0,0.01);
 }
-
-#body {
-    width: 100%;
-    height: calc(100% - 100px);
+#my_name {
+    display: none;
 }
-
-
 #side_bar{
     width: 300px;
     height: 500px;
-    background-color: beige;
-
     float: right;
 }
-
 #chat_chat {
     height: 400px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
-
 #chat_box {
     width: 75%;
-    height: 100px;
-
     float: left;
 }
-
 #chat_send {
     width: 20%;
-    height: 100px;
-
     float: right;
 }
 
@@ -57,3 +43,39 @@
     height: 100%;
 }
 
+.logo, .label {
+  display: inline-block;
+}
+
+#title {
+  font-size: 100px;
+  margin-bottom: 0px;
+}
+#info {
+  padding-left: 10px;
+}
+form {
+  padding-left: 8px;
+}
+#info > h1:first-child, form .label {
+  margin: 0px;
+}
+#timer {
+    display: inline-block;
+    margin-top: 30px;
+    font-size: 100px;
+}
+nav li {
+    display: inline-block;
+    margin: 40px 40px 20px 10px;
+    font-size: 20px;
+    text-align: center;
+    width: 120px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.1);
+}
+nav li:hover {
+    background-color: rgba(0,0,0,0.05);
+}
