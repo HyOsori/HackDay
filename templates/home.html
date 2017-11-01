@@ -7,6 +7,7 @@
 
 <!-- body html -->
 {% block body %}
+<span id="top"></span>
 <div id="header">
     <img class="logo" src="{{ static_url('images/Logo.png') }}" width="70"/>
     <h1 class="logo">OSORI</h1>
@@ -17,27 +18,34 @@
         <div id='timer'></div>
     </div>
     <nav>
-        <li>Notice</li>
-        <li>Awesome</li>
-        <li>Repository</li>
-        <li>TimeTable</li>
+        <a href="#notice"><li>NOTICE</li></a>
+        <a href="#awesome"><li>AWESOME</li></a>
+        <a href="#repository"><li>REPOSITORIES</li></a>
+        <a href="#time_table"><li>TIMETABLE</li></a>
     </nav>
 </div>
 
-<div id="body">
-    <div id="contents_viewer">
-        <div id="time_table">
+<a href="#top"><b id="top_btn">&uarr;</b></a>
 
-        </div>
-        <h1>Awesome!</h1>
-        <button id="refresh_awesome_button">Refresh</button>
-        <div id="awesome_contribute">
-        </div>
-        <h1>Repository 진행 현황</h1>
-        <button id="refresh_repo_button">Refresh</button>
-        <div id="repository_detail">
-        </div>
+<div id="contents">
+    <div id="notice">
+        <h1>NOTICE</h1>
     </div>
+    <div id="awesome">
+        <h1>AWESOME!</h1>
+        <button id="refresh_awesome_button">Refresh</button>
+        <div id="awesome_contribute"></div>
+    </div>
+    <div id="repository">
+        <h1>REPOSITORIES</h1>
+        <button id="refresh_repo_button">Refresh</button>
+        <div id="repository_detail"></div>
+    </div>
+    <div id="time_table">
+        <h1>TIMETABLE</h1>
+    </div>
+
+    <!--
     <div id="side_bar">
         <div id="chat_chat">
 
@@ -46,7 +54,7 @@
         <input type="text" id="chat_box">
         <button id="chat_send">send</button>
     </div>
-
+    -->
 </div>
 
 

@@ -6,6 +6,54 @@
 #my_name {
     display: none;
 }
+.logo {
+  display: inline-block;
+}
+#title {
+  font-size: 100px;
+  margin-bottom: 0px;
+}
+#info {
+  padding-left: 10px;
+}
+#info > h1:first-child {
+  margin: 0px;
+}
+#timer {
+    display: inline-block;
+    margin-top: 30px;
+    font-size: 100px;
+}
+nav li {
+    display: inline-block;
+    margin: 40px 40px 20px 10px;
+    font-size: 20px;
+    text-align: center;
+    width: 140px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: black;
+}
+nav li:hover, #top_btn:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+#top_btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 15px 20px;
+    background-color: rgba(0,0,0,0.1);
+    color: rgba(255, 255, 255, 1);
+    font-size: 20px;
+    text-decoration: none;
+}
+
+/*
 #side_bar{
     width: 300px;
     height: 500px;
@@ -23,7 +71,6 @@
     width: 20%;
     float: right;
 }
-
 #contents_viewer {
     width: calc(100% - 300px);
     height:100%;
@@ -42,40 +89,4 @@
 #repository_detail {
     height: 100%;
 }
-
-.logo, .label {
-  display: inline-block;
-}
-
-#title {
-  font-size: 100px;
-  margin-bottom: 0px;
-}
-#info {
-  padding-left: 10px;
-}
-form {
-  padding-left: 8px;
-}
-#info > h1:first-child, form .label {
-  margin: 0px;
-}
-#timer {
-    display: inline-block;
-    margin-top: 30px;
-    font-size: 100px;
-}
-nav li {
-    display: inline-block;
-    margin: 40px 40px 20px 10px;
-    font-size: 20px;
-    text-align: center;
-    width: 120px;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    padding: 10px 20px;
-    background-color: rgba(0,0,0,0.1);
-}
-nav li:hover {
-    background-color: rgba(0,0,0,0.05);
-}
+*/
