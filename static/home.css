@@ -63,6 +63,33 @@ nav li:hover, #top_btn:hover {
     font-size: 40px;
     border-bottom: 1px solid rgb(200, 200, 200);
 }
+#chat_container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 500px;
+    background-color: rgba(0,0,0,0.1);
+    padding: 10px;
+}
+#chat_chat {
+    height: 450px;
+    margin-bottom: 7px;
+    background-color: rgba(255,255,255,0.5);
+    padding: 10px;
+    max-width: 203px;
+    overflow-y: scroll;
+}
+#chat_chat li {
+    list-style: none;
+    margin-top: 5px;
+    word-break: break-all;
+}
+#chat_chat li:first-child {
+    margin-top: 0px;
+}
+#chat_chat .mychat {
+    color: blue;
+}
 /*
 #side_bar{
     width: 300px;

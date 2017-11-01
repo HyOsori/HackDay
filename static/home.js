@@ -30,10 +30,15 @@ chatSocket.onmessage = function (evt) {
     var data = evt.data;
     data = JSON.parse(data);
 
-    var message = data["name"] + ": " + data["message"];
+    var message = "[" + data["name"] + "] : " + data["message"];
     var appendedMessage = document.createElement("li");
     appendedMessage.appendChild(document.createTextNode(message));
+    
+    if (data["name"] == myNameText.textContent) {
+        appendedMessage.setAttribute('class', 'mychat');
+    }
     chatChat.appendChild(appendedMessage);
+    chatChat.scrollTop = chatChat.scrollHeight;
 };
 
 var chatSendButton = document.getElementById("chat_send");
