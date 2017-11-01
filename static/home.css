@@ -52,7 +52,17 @@ nav li:hover, #top_btn:hover {
     font-size: 20px;
     text-decoration: none;
 }
-
+#contents {
+    padding: 30px 50px 40px 60px;
+    min-width: 1080px;
+}
+.contents_container {
+    padding-bottom: 50px;
+}
+.contents_title {
+    font-size: 40px;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
 /*
 #side_bar{
     width: 300px;
