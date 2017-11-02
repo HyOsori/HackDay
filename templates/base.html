@@ -5,6 +5,7 @@
     <title>{{ handler.settings["title"] }}</title>
 
     <!--css code-->
+    <link rel="stylesheet" type="text/css" href="{{ static_url('base.css') }}"/>
     {% block head %}
     {% end %}
 </head>
@@ -15,5 +16,3 @@
 {% block bottom %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {% end %}
-</body>
-</html>

@@ -7,34 +7,50 @@
 
 <!-- body html -->
 {% block body %}
+<span id="top"></span>
 <div id="header">
-    <h1>Osori HackDay</h1>
-    <h3 id="my_name">{{ current_user }}</h3>
+    <img class="logo" src="{{ static_url('images/Logo.png') }}" width="70"/>
+    <h1 class="logo">OSORI</h1>
+    <h2 id="my_name">{{ current_user }}</h2>
+    <h1 id="title">OSORI HACKDAY</h1>
+    <div id="info">
+        <h1>1st: 2017.11.04 15:30 - 2017.11.05 9:30</h1>
+        <div id='timer'></div>
+    </div>
+    <nav>
+        <a href="#notice"><li>NOTICE</li></a>
+        <a href="#awesome"><li>AWESOME</li></a>
+        <a href="#repository"><li>REPOSITORIES</li></a>
+        <a href="#schedule"><li>SCHEDULES</li></a>
+    </nav>
 </div>
 
-<div id="body">
-    <div id="contents_viewer">
-        <div id="time_table">
+<a href="#top"><b id="top_btn">&uarr;</b></a>
 
-        </div>
-        <h1>Awesome!</h1>
+<div id="contents">
+    <div id="notice" class="contents_container">
+        <p class="contents_title">NOTICE</p>
+        <ul id="notice_list"></ul>
+    </div>
+    <div id="awesome" class="contents_container">
+        <p class="contents_title">AWESOME!</p>
         <button id="refresh_awesome_button">Refresh</button>
-        <div id="awesome_contribute">
-        </div>
-        <h1>Repository 진행 현황</h1>
+        <div id="awesome_contribute"></div>
+    </div>
+    <div id="repository" class="contents_container">
+        <p class="contents_title">REPOSITORIES</p>
         <button id="refresh_repo_button">Refresh</button>
-        <div id="repository_detail">
-        </div>
+        <div id="repository_detail"></div>
     </div>
-    <div id="side_bar">
-        <div id="chat_chat">
+    <div id="schedule" class="contents_container">
+        <p class="contents_title">SCHEDULES</p>
+    </div>
 
-        </div>
-
+    <div id="chat_container">
+        <div id="chat_chat"></div>
         <input type="text" id="chat_box">
-        <button id="chat_send">chat send</button>
+        <button id="chat_send">send</button>
     </div>
-
 </div>
 
 
@@ -43,4 +59,6 @@
 {% block bottom %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="{{ static_url('home.js') }}"></script>
+<script src="{{ static_url('timer.js') }}"></script>
+<script src="{{ static_url('scheduler.js') }}"></script>
 {% end %}
