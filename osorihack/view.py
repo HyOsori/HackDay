@@ -155,24 +155,15 @@ class ChatHandler(tornado.websocket.WebSocketHandler):
         chat_pool.append(self)
 
     def on_message(self, message):
-        for chatter in chat_pool:
-            chatter.write_message(message)
+        try:
+            message = json.loads(message)
+            if message["type"] == "message":
+                for chatter in chat_pool:
+                    chatter.write_message(message)
+        except:
+            pass
 
     def on_close(self):
         chat_pool.remove(self)
 
-
-notice_pool = list()
-
-
-class NoticeHandler(tornado.websocket.WebSocketHandler):
-    def open(self, *args, **kwargs):
-        notice_pool.append(self)
-
-    def on_message(self, message):
-        for user in notice_pool:
-            user.write_message(message)
-
-    def on_close(self):
-        notice_pool.remove(self)
 
