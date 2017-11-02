@@ -44,6 +44,11 @@
     </div>
     <div id="schedule" class="contents_container">
         <p class="contents_title">SCHEDULES</p>
+        <div id="tooltip" class="hidden">
+            <p id="time"></p>
+            <p id="activity"></p>
+        </div>
+        <div id="schedule_chart"></div>
     </div>
 
     <div id="chat_container">
@@ -58,6 +63,7 @@
 <!-- javascript -->
 {% block bottom %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="{{ static_url('home.js') }}"></script>
 <script src="{{ static_url('timer.js') }}"></script>
 <script src="{{ static_url('scheduler.js') }}"></script>

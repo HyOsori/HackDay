@@ -113,42 +113,21 @@ nav li:hover, #top_btn:hover {
 .notice_hidden {
     display: none;
 }
-.notice {
+#tooltip {
+    position: fixed;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    pointer-events: none;
 }
-/*
-#side_bar{
-    width: 300px;
-    height: 500px;
-    float: right;
+#tooltip.hidden {
+    display: none;
 }
-#chat_chat {
-    height: 400px;
-    overflow-y: scroll;
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
 }
-#chat_box {
-    width: 75%;
-    float: left;
-}
-#chat_send {
-    width: 20%;
-    float: right;
-}
-#contents_viewer {
-    width: calc(100% - 300px);
-    height:100%;
-    background-color: aliceblue;
-    float: left;
-}
-
-#time_table {
-    height: 100%;
-}
-
-#awesome_contribute {
-    height: 100%;
-}
-
-#repository_detail {
-    height: 100%;
-}
-*/

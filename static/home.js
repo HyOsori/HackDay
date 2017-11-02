@@ -6,6 +6,7 @@ window.onload = function() {
     var clickEvent = document.createEvent("HTMLEvents");
 
     startclock();
+    moveLine();
 
     addNotice("이것은 첫 번째 공지사항입니다.",
               "여름장이란 애시당초에 글러서, 해는 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 " +
@@ -31,7 +32,7 @@ window.onload = function() {
 
 console.log(window.location.host);
 
-var chatSocket = new WebSocket("ws://" + window.location.host + "/chat");
+var chatSocket = new WebSocket("wss://" + window.location.host + "/chat");
 chatSocket.onopen = function () {
     chatSendButton.onclick = function () {
         sendMessage();
@@ -42,7 +43,8 @@ function sendMessage() {
     var chat = new Object();
     chat.name = myNameText.textContent;
     chat.message = chatBox.value;
-
+    chat.type = "message";
+    
     data = JSON.stringify(chat)
     chatSocket.send(data);
 
@@ -129,14 +131,14 @@ function loadRepo() {
                 for (var j = 0; j < repoData["users"].length; j++) {
                     var userData = repoData["users"][j];
                     console.log(userData);
-                    totalCommit += userData["commit_count"];
+                    totalCommit += userData["commit"];
                     repoDetailHtml += "<a href=" + "\""+ userData["link"] + "\"" + ">" + userData["name"] + "</a>";
                     repoDetailHtml += ": ";
-                    for (var k = 0; k < userData.commit_count; k++) {
+                    for (var k = 0; k < userData.commit; k++) {
                         repoDetailHtml += "★"
                     }
                     repoDetailHtml += "<br>"
-                    repoDetailHtml += String(userData.commit_count) + "commit";
+                    repoDetailHtml += String(userData.commit) + "commit";
                     repoDetailHtml += "<br>";
                 }
                 repoDetailHtml += "<h4>" + "total Commit: " +  String(totalCommit) + "commit" + "</h4>";
