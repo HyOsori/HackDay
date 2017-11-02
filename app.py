@@ -1,16 +1,17 @@
 import functools
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
+from tornado.options import define, options, parse_command_line
 from osorihack import app
 from osorihack.view import refresh_information
 
+define("port", default=5000, help="run on the given port", type=int)
+
+
+def run():
+    parse_command_line()
+    app.listen(options.port)
+    IOLoop.instance().start()
+
 if __name__ == "__main__":
-    print("Start osori hack-day")
-    http_server = HTTPServer(app)
-    http_server.listen(5000, "0.0.0.0")
-    print("ready for initialize data")
-    # init_data_func = functools.partial(refresh_information, app.managed_info)
-    # IOLoop.current().run_sync(init_data_func)
-    print("initialize data is done")
-    print("Start Server")
-    IOLoop.current().start()
+    run()
