@@ -30,9 +30,18 @@ class OsoriHack(tornado.web.Application):
             debug=True,
         )
 
+        # self.managed_repo
+        self.managed_info = list()
+        with open("management.txt", "r") as f:
+            for line in f.buffer:
+                info = line.decode()
+                info = info.split()
+                self.managed_info.append(ManagedInfo(info[0], info[1]))
+
         super(OsoriHack, self).__init__(self.handler, **self.settings)
 
 app = OsoriHack()
 
 if __name__ == "__main__":
     pass
+

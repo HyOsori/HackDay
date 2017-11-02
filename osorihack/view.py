@@ -71,7 +71,7 @@ class AwesomeResultHandler(BaseHandler):
             self.write(cached_data["repo_data"])
             return
 
-        yield refresh_information()
+        yield refresh_information(self.application.managed_info)
         self.write(cached_data["awesome_data"])
 
 
@@ -83,12 +83,12 @@ class SearchRepositoryHandler(BaseHandler):
             self.write(cached_data["repo_data"])
             return
 
-        yield refresh_information()
+        yield refresh_information(self.application.managed_info)
         self.write(cached_data["repo_data"])
 
 
 @tornado.gen.coroutine
-def refresh_information():
+def refresh_information(managed_repo):
     repo_group = list()
     for managed_info in managed_repo:
         repo_response = yield osorihack.githubhelper.get_repository(managed_info.owner, managed_info.repo_name)
