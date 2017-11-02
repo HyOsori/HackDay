@@ -1,7 +1,5 @@
 import os
-
 import tornado.web
-
 from osorihack.model.repository import ManagedInfo
 
 APP_NAME = "Osori_HackDay"
@@ -18,6 +16,7 @@ class OsoriHack(tornado.web.Application):
 
             (r"/repo/([^/]+)/([^/]+)", osorihack.view.SearchRepositoryHandler),
             (r"/repo", osorihack.view.SearchRepositoryHandler),
+            (r"/awesome", osorihack.view.AwesomeResultHandler),
 
             (r"/chat", osorihack.view.ChatHandler),
         ]

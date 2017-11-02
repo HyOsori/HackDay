@@ -14,16 +14,9 @@ EXPIRED_TIME = 5 * 60
 
 cached_data = {"time": 0, "repo_data": None, "awesome_data": None, "managed_info": None}
 
-managed_repo = list()
-
-managed_repo.append(ManagedInfo("bees1114", "Calenderation"))
-managed_repo.append(ManagedInfo("junsulime", "osori-hackday-helper"))
-managed_repo.append(ManagedInfo("seubseub", "OsoriHackDayARKIT"))
-
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
-        # TODO: cookie key value setting is needed
         user_name = self.get_secure_cookie(USER_COOKIE)
         return user_name
 
@@ -65,10 +58,11 @@ class HomeHandler(BaseHandler):
 
 # TODO: caching search result and .. if data is not expired, resend it
 class AwesomeResultHandler(BaseHandler):
+    @tornado.gen.coroutine
     def get(self, *args, **kwargs):
         cached_time = cached_data["time"]
         if time.time() - cached_time < EXPIRED_TIME:
-            self.write(cached_data["repo_data"])
+            self.write(cached_data["awesome_data"])
             return
 
         yield refresh_information(self.application.managed_info)
@@ -90,6 +84,10 @@ class SearchRepositoryHandler(BaseHandler):
 @tornado.gen.coroutine
 def refresh_information(managed_repo):
     repo_group = list()
+
+    best_repository = None
+    best_contributor = None
+
     for managed_info in managed_repo:
         repo_response = yield osorihack.githubhelper.get_repository(managed_info.owner, managed_info.repo_name)
         repo_info = json.loads(repo_response.body.decode())
@@ -97,6 +95,7 @@ def refresh_information(managed_repo):
         repo_star = repo_info["stargazers_count"]
 
         contributor_response = yield osorihack.githubhelper.get_contributors(managed_info.owner, managed_info.repo_name)
+        total_commit = 0
 
         contributor_group = list()
         # list of contributors
@@ -109,6 +108,11 @@ def refresh_information(managed_repo):
             )
             contributor_group.append(contributor)
 
+            if best_contributor is None or best_contributor.commit < contributor.commit:
+                best_contributor = contributor
+
+            total_commit += contributor.commit
+
         repository = Repository(managed_info.repo_name,
                                 managed_info.owner,
                                 contributor_group,
@@ -116,15 +120,24 @@ def refresh_information(managed_repo):
                                 )
         repository.repo_size = repo_size
         repository.star = repo_star
+        repository.commit = total_commit
         repo_group.append(repository)
+
+        if best_repository is None or best_repository.commit < repository.commit:
+            best_repository = repository
 
     data_group = list()
     for repo in repo_group:
         data_group.append(Repository.json_serializable(repo))
     repo_data = json.dumps(data_group)
-    # awesome_data =
+
+    awesome_data = dict()
+    awesome_data["best_commit_repo"] = Repository.json_serializable(best_repository)
+    awesome_data["best_commit_contributor"] = best_contributor.__dict__
+    awesome_data = json.dumps(awesome_data)
 
     cached_data["time"] = time.time()
+    cached_data["awesome_data"] = awesome_data
     cached_data["repo_data"] = repo_data
     cached_data["managed_info"] = repo_group
 
