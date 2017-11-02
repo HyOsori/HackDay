@@ -4,7 +4,9 @@
 
 window.onload = function() {
     var clickEvent = document.createEvent("HTMLEvents");
+
     startclock();
+
     addNotice("이것은 첫 번째 공지사항입니다.",
               "여름장이란 애시당초에 글러서, 해는 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 " +
               "전 휘장 밑으로 등줄기를 훅훅 볶는다. 마을 사람들은 거지 반 돌아간 뒤요, 팔리지 못한 나무꾼 패가" +
@@ -21,10 +23,13 @@ window.onload = function() {
               "최신 공지사항은 페이지 로드 시 자동으로 펼쳐집니다. 얍얍");
 
     clickEvent.initEvent('click', true, false);
-    noticeList.childNodes[0].dispatchEvent(clickEvent);
+
+    if (noticeList.hasChildNodes()) {
+        noticeList.childNodes[0].dispatchEvent(clickEvent);
+    }
 };
 
-console.log(window.location.host)
+console.log(window.location.host);
 
 var chatSocket = new WebSocket("ws://" + window.location.host + "/chat");
 chatSocket.onopen = function () {
@@ -55,7 +60,6 @@ function addNotice(title, content) {
 
     newNotice.addEventListener("click", function() {
         var child = newNotice.childNodes[1];
-        console.log(child);
         if (child.className == 'notice_hidden') {
             child.className = 'notice';
         } else {
