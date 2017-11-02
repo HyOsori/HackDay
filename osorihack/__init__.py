@@ -13,12 +13,14 @@ class OsoriHack(tornado.web.Application):
             (r"/", osorihack.view.IndexHandler),
             (r"/home", osorihack.view.HomeHandler),
             (r"/login", osorihack.view.LoginHandler),
+            (r"/error", osorihack.view.ErrorHandler),
 
             (r"/repo/([^/]+)/([^/]+)", osorihack.view.SearchRepositoryHandler),
             (r"/repo", osorihack.view.SearchRepositoryHandler),
             (r"/awesome", osorihack.view.AwesomeResultHandler),
 
             (r"/chat", osorihack.view.ChatHandler),
+            (r"/notice", osorihack.view.NoticeHandler),
         ]
 
         self.settings = dict(

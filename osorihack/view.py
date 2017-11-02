@@ -10,7 +10,7 @@ import osorihack.githubhelper
 from osorihack.model.repository import ManagedInfo, Repository, Contributor
 
 USER_COOKIE = "happyhackday"
-EXPIRED_TIME = 5 * 60
+EXPIRED_TIME = 60
 
 cached_data = {"time": 0, "repo_data": None, "awesome_data": None, "managed_info": None}
 
@@ -30,6 +30,11 @@ class IndexHandler(BaseHandler):
             self.redirect("/home")
 
 
+class ErrorHandler(BaseHandler):
+    def get(self, *args, **kwargs):
+        self.render("error.html")
+
+
 class LoginHandler(BaseHandler):
     def get(self):
         user = self.get_current_user()
@@ -41,7 +46,7 @@ class LoginHandler(BaseHandler):
     def post(self):
         user_name = self.get_argument("user_name")
 
-        if user_name is not None:
+        if user_name is not None and len(user_name) != 0:
             self.set_secure_cookie(USER_COOKIE, user_name)
             self.redirect("/home")
         else:
@@ -155,4 +160,19 @@ class ChatHandler(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         chat_pool.remove(self)
+
+
+notice_pool = list()
+
+
+class NoticeHandler(tornado.websocket.WebSocketHandler):
+    def open(self, *args, **kwargs):
+        notice_pool.append(self)
+
+    def on_message(self, message):
+        for user in notice_pool:
+            user.write_message(message)
+
+    def on_close(self):
+        notice_pool.remove(self)
 
