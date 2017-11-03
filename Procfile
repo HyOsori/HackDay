@@ -1,1 +1,1 @@
-web: gunicorn app:run
+web: gunicorn -k tornado app:app
