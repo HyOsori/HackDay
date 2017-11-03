@@ -34,8 +34,7 @@ nav li {
     border-radius: 10px;
     padding: 10px 20px;
     background-color: rgba(0,0,0,0.1);
-    text-decoration: none;
-    color: black;
+    cursor: pointer;
 }
 nav li:hover, #top_btn:hover {
     background-color: rgba(0,0,0,0.05);
