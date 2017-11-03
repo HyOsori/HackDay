@@ -16,8 +16,8 @@ window.onload = function() {
         noticeList.childNodes[0].dispatchEvent(clickEvent);
     }
 
-    var repoRefresh = setInterval(loadRepo, 300000);
-    var awesomeRefresh = setInterval(loadAwesome, 300000);
+    var repoRefresh = setInterval(loadRepo, 600000);
+    var awesomeRefresh = setInterval(loadAwesome, 600000);
 };
 
 console.log(window.location.host);
@@ -96,38 +96,4 @@ chatBox.onkeydown = function (event) {
     if (event.keyCode == 13) {
         sendMessage();
     }
-}
-
-function loadRepo() {
-    $.ajax({
-        url: "/repo",
-        success: function (result) {
-            console.log(result);
-            var repoDetailHtml = "";
-            var repoDataList = JSON.parse(result);
-            for (var i = 0; i < repoDataList.length; i++) {
-                var repoData = repoDataList[i];
-                var totalCommit = 0;
-                repoDetailHtml += "<a href=" + "\""+ repoData["link"] + "\"" + ">" + "<h2>" + repoData["name"] + "</h2>" + "</a>";
-                repoDetailHtml += "code size: " + String(repoData["repo_size"]) + "KB" + "<br>";
-                repoDetailHtml += "star: " + String(repoData["star"]) + "★" + "<br><br>";
-                for (var j = 0; j < repoData["users"].length; j++) {
-                    var userData = repoData["users"][j];
-                    console.log(userData);
-                    totalCommit += userData["commit"];
-                    repoDetailHtml += "<a href=" + "\""+ userData["link"] + "\"" + ">" + userData["name"] + "</a>";
-                    repoDetailHtml += ": ";
-                    for (var k = 0; k < userData.commit; k++) {
-                        repoDetailHtml += "★"
-                    }
-                    repoDetailHtml += "<br>"
-                    repoDetailHtml += String(userData.commit) + "commit";
-                    repoDetailHtml += "<br>";
-                }
-                repoDetailHtml += "<h4>" + "total Commit: " +  String(totalCommit) + "commit" + "</h4>";
-                repoDetailHtml += "<br>"
-            }
-            repoDetailDiv.innerHTML = repoDetailHtml
-        }
-    });
 }
