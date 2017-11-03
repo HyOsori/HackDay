@@ -35,9 +35,7 @@ chatSocket.onopen = function () {
 };
 chatSocket.onclose = function () {
     var appendedMessage = document.createElement("p");
-    appendedMessage.appendChild(document.createTextNode("연결이 끊어졌습니다."));
-    appendedMessage.appendChild(document.createElement("br"));
-    appendedMessage.appendChild(document.createTextNode("새로고침을 해주세요."));
+    appendedMessage.appendChild(document.createTextNode("연결이 끊어졌습니다. 새로고침을 해주세요."));
     chatChat.appendChild(appendedMessage);
     chatChat.scrollTop = chatChat.scrollHeight;
 };
