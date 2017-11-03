@@ -16,17 +16,30 @@ window.onload = function() {
         noticeList.childNodes[0].dispatchEvent(clickEvent);
     }
 
-    var repoRefresh = setInterval(loadRepo, 600000);
-    var awesomeRefresh = setInterval(loadAwesome, 600000);
+    var repoRefresh = setInterval(loadRepo, 300000);
+    var awesomeRefresh = setInterval(loadAwesome, 300000);
 };
 
 console.log(window.location.host);
 
 var chatSocket = new WebSocket("wss://" + window.location.host + "/conn");
 chatSocket.onopen = function () {
+    var appendedMessage = document.createElement("p");
+    appendedMessage.appendChild(document.createTextNode("연결되었습니다."));
+    chatChat.appendChild(appendedMessage);
+    chatChat.scrollTop = chatChat.scrollHeight;
+
     chatSendButton.onclick = function () {
         sendMessage();
     }
+};
+chatSocket.onclose = function () {
+    var appendedMessage = document.createElement("p");
+    appendedMessage.appendChild(document.createTextNode("연결이 끊어졌습니다."));
+    appendedMessage.appendChild(document.createElement("br"));
+    appendedMessage.appendChild(document.createTextNode("새로고침을 해주세요."));
+    chatChat.appendChild(appendedMessage);
+    chatChat.scrollTop = chatChat.scrollHeight;
 };
 
 function sendMessage() {
