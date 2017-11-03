@@ -10,7 +10,7 @@ import osorihack.githubhelper
 from osorihack.model.repository import Repository, Contributor, Notice
 
 USER_COOKIE = "happyhackday"
-EXPIRED_TIME = 60
+EXPIRED_TIME = 60 * 5
 
 cached_data = {"time": 0, "repo_data": None, "awesome_data": None, "managed_info": None}
 
@@ -90,7 +90,7 @@ class AwesomeResultHandler(BaseHandler):
     @tornado.gen.coroutine
     def get(self, *args, **kwargs):
         cached_time = cached_data["time"]
-        if time.time() - cached_time < EXPIRED_TIME:
+        if time.time() - cached_time < EXPIRED_TIME or refreshing:
             self.write(cached_data["awesome_data"])
             return
 
@@ -102,7 +102,7 @@ class SearchRepositoryHandler(BaseHandler):
     @tornado.gen.coroutine
     def get(self, *args, **kwargs):
         cached_time = cached_data["time"]
-        if time.time() - cached_time < EXPIRED_TIME:
+        if time.time() - cached_time < EXPIRED_TIME or refreshing:
             self.write(cached_data["repo_data"])
             return
 
@@ -110,8 +110,14 @@ class SearchRepositoryHandler(BaseHandler):
         self.write(cached_data["repo_data"])
 
 
+refreshing = False
+
+
 @tornado.gen.coroutine
 def refresh_information(managed_repo):
+    global refreshing
+
+    refreshing = True
     repo_group = list()
 
     best_repository = None
@@ -170,6 +176,7 @@ def refresh_information(managed_repo):
     cached_data["repo_data"] = repo_data
     cached_data["managed_info"] = repo_group
 
+    refreshing = False
 
 chat_pool = list()
 
