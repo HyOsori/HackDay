@@ -177,6 +177,8 @@ chat_pool = list()
 class ConnHandler(tornado.websocket.WebSocketHandler):
     def open(self, *args, **kwargs):
         chat_pool.append(self)
+        for notice in self.application.notice_list:
+            self.write_message(Notice.serializable(notice))
 
     def on_message(self, message):
         try:
