@@ -66,7 +66,7 @@ chatSocket.onmessage = function (evt) {
     var data = evt.data;
     data = JSON.parse(data);
     console.log(data);
-    if (data["type"] == "messsage") {
+    if (data["type"] == "message") {
         var message = "[" + data["name"] + "] : " + data["message"];
         var appendedMessage = document.createElement("li");
         appendedMessage.appendChild(document.createTextNode(message));
