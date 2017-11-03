@@ -13,6 +13,10 @@ USER_COOKIE = "happyhackday"
 EXPIRED_TIME = 60
 
 cached_data = {"time": 0, "repo_data": None, "awesome_data": None, "managed_info": None}
+notice_list = list()
+
+TYPE_MESSAGE = "message"
+TYPE_NOTICE = "notice"
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -38,6 +42,25 @@ class ErrorHandler(BaseHandler):
 class AdminHandler(BaseHandler):
     def get(self, *args, **kwargs):
         self.render("admin.html")
+
+    def post(self, *args, **kwargs):
+        try:
+            message = json.loads(self.request.body.decode())
+            if self.settings["auth_key"] == message["auth"]:
+                send_message = dict()
+                send_message["title"] = message["title"]
+                send_message["message"] = message["message"]
+                send_message["type"] = TYPE_NOTICE
+                notice_list.append(send_message)
+                for chatter in chat_pool:
+                    chatter.write_message(json.dumps(send_message).encode())
+                # success case
+                self.write()
+                return
+        except Exception as e:
+            pass
+        # failure case
+        self.write()
 
 
 class LoginHandler(BaseHandler):
@@ -66,7 +89,7 @@ class HomeHandler(BaseHandler):
         else:
             self.redirect("/login")
 
-# TODO: caching search result and .. if data is not expired, resend it
+
 class AwesomeResultHandler(BaseHandler):
     @tornado.gen.coroutine
     def get(self, *args, **kwargs):
@@ -162,7 +185,7 @@ class ChatHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         try:
             parsed_message = json.loads(message)
-            if parsed_message["type"] == "message":
+            if parsed_message["type"] == TYPE_MESSAGE:
                 for chatter in chat_pool:
                     chatter.write_message(message)
         except Exception:
