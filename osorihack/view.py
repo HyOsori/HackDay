@@ -55,12 +55,12 @@ class AdminHandler(BaseHandler):
                 for chatter in chat_pool:
                     chatter.write_message(json.dumps(send_message).encode())
                 # success case
-                self.write()
+                self.write(json.dumps({"response": "success"}).encode())
                 return
         except Exception as e:
             pass
         # failure case
-        self.write()
+        self.write(json.dumps({"response": "failure"}).encode())
 
 
 class LoginHandler(BaseHandler):

@@ -19,6 +19,7 @@ noticeSendButton.onclick = function () {
         url: '/admin',
         success: function (result) {
             console.log(result);
+            alert(result["response"]);
         }
     });
 };
