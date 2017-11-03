@@ -7,13 +7,12 @@ import time
 
 import osorihack.githubhelper
 
-from osorihack.model.repository import ManagedInfo, Repository, Contributor
+from osorihack.model.repository import Repository, Contributor, Notice
 
 USER_COOKIE = "happyhackday"
 EXPIRED_TIME = 60
 
 cached_data = {"time": 0, "repo_data": None, "awesome_data": None, "managed_info": None}
-notice_list = list()
 
 TYPE_MESSAGE = "message"
 TYPE_NOTICE = "notice"
@@ -47,13 +46,10 @@ class AdminHandler(BaseHandler):
         try:
             message = json.loads(self.request.body.decode())
             if self.settings["auth_key"] == message["auth"]:
-                send_message = dict()
-                send_message["title"] = message["title"]
-                send_message["message"] = message["message"]
-                send_message["type"] = TYPE_NOTICE
-                notice_list.append(send_message)
+                notice = Notice(message["title"], message["message"])
+                self.application.notice_list.append(notice)
                 for chatter in chat_pool:
-                    chatter.write_message(json.dumps(send_message).encode())
+                    chatter.write_message(json.dumps(Notice.serializable(notice)).encode())
                 # success case
                 self.write(json.dumps({"response": "success"}).encode())
                 return

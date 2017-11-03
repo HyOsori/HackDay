@@ -1,9 +1,22 @@
 import json
 
+
 class ManagedInfo(object):
     def __init__(self, owner, repo_name):
         self.owner = owner
         self.repo_name = repo_name
+
+
+class Notice(object):
+    def __init__(self, title, message):
+        self.title = title
+        self.message = message
+
+    @staticmethod
+    def serializable(notice):
+        notice_dict = notice.__dict__
+        notice_dict["type"] = "notice"
+        return notice_dict
 
 
 class Repository(object):

@@ -1,6 +1,6 @@
 import os
 import tornado.web
-from osorihack.model.repository import ManagedInfo
+from osorihack.model.repository import ManagedInfo, Notice
 
 APP_NAME = "Osori_HackDay"
 
@@ -39,6 +39,13 @@ class OsoriHack(tornado.web.Application):
                 info = line.decode()
                 info = info.split()
                 self.managed_info.append(ManagedInfo(info[0], info[1]))
+
+        self.notice_list = list()
+        with open("notice.txt", "r") as f:
+            for line in f.buffer:
+                info = line.decode()
+                info = info.split('$')
+                self.notice_list.append(Notice(info[0], info[1]))
 
         super(OsoriHack, self).__init__(self.handler, **self.settings)
 
