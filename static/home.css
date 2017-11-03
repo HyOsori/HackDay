@@ -131,3 +131,28 @@ nav li:hover, #top_btn:hover {
     font-size: 16px;
     line-height: 20px;
 }
+#schedule table th {
+    height: 50px;
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+}
+#schedule table th:first-child {
+    width: 130px;
+}
+#schedule table th:last-child {
+    width: 300px;
+}
+#schedule table tr td {
+    height: 30px;
+    text-align: center;
+}
+#schedule table tr td:first-child {
+    text-align: center;
+}
+#schedule table tr td:last-child {
+    padding-left: 10px;
+}
+#next_day td{
+    border-top: 1px solid black;
+}

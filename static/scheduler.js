@@ -95,6 +95,14 @@ var type
 var time = 80;
 
 schedule.forEach(function(obj, i) {
+  d3.select("#schedules")
+    .append("rect")
+    .attr('width', 1)
+    .attr('height', 110)
+    .attr('x', time)
+    .attr('y', 10)
+    .style('fill', "FFFFFF");
+
   chart.selectAll(".type")
         .append("rect")
         .attr("class", "minutes")
