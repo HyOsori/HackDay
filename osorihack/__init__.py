@@ -14,13 +14,13 @@ class OsoriHack(tornado.web.Application):
             (r"/home", osorihack.view.HomeHandler),
             (r"/login", osorihack.view.LoginHandler),
             (r"/error", osorihack.view.ErrorHandler),
+            (r"/admin", osorihack.view.AdminHandler),
 
             (r"/repo/([^/]+)/([^/]+)", osorihack.view.SearchRepositoryHandler),
             (r"/repo", osorihack.view.SearchRepositoryHandler),
             (r"/awesome", osorihack.view.AwesomeResultHandler),
 
             (r"/chat", osorihack.view.ChatHandler),
-            (r"/notice", osorihack.view.NoticeHandler),
         ]
 
         self.settings = dict(
@@ -28,6 +28,7 @@ class OsoriHack(tornado.web.Application):
             template_path=os.path.join(os.getcwd(), "templates"),
             static_path=os.path.join(os.getcwd(), "static"),
             cookie_secret="osorihackday",
+            auth_key="qwerty",
             debug=True,
         )
 

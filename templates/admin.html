@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+<!-- body html -->
+{% block body %}
+<h1>Admin Page</h1>
+
+
+<h3>Send Notice</h3>
+Title: <input type="text" id="notice_title">
+<br>
+Message: <input type="text" id="notice_message">
+<br>
+AuthKey: <input type="text" id="notice_auth">
+<br>
+<button id="notice_send">Send notice</button>
+{% end %}
+<!-- javascript -->
+{% block bottom %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{{ static_url('admin.js') }}"></script>
+{% end %}

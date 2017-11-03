@@ -35,6 +35,11 @@ class ErrorHandler(BaseHandler):
         self.render("error.html")
 
 
+class AdminHandler(BaseHandler):
+    def get(self, *args, **kwargs):
+        self.render("admin.html")
+
+
 class LoginHandler(BaseHandler):
     def get(self):
         user = self.get_current_user()
@@ -156,11 +161,11 @@ class ChatHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         try:
-            message = json.loads(message)
-            if message["type"] == "message":
+            parsed_message = json.loads(message)
+            if parsed_message["type"] == "message":
                 for chatter in chat_pool:
                     chatter.write_message(message)
-        except:
+        except Exception:
             pass
 
     def on_close(self):
