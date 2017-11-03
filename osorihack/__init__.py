@@ -20,7 +20,7 @@ class OsoriHack(tornado.web.Application):
             (r"/repo", osorihack.view.SearchRepositoryHandler),
             (r"/awesome", osorihack.view.AwesomeResultHandler),
 
-            (r"/chat", osorihack.view.ChatHandler),
+            (r"/conn", osorihack.view.ConnHandler),
         ]
 
         self.settings = dict(

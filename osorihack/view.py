@@ -178,7 +178,7 @@ def refresh_information(managed_repo):
 chat_pool = list()
 
 
-class ChatHandler(tornado.websocket.WebSocketHandler):
+class ConnHandler(tornado.websocket.WebSocketHandler):
     def open(self, *args, **kwargs):
         chat_pool.append(self)
 
