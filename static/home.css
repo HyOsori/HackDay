@@ -113,42 +113,46 @@ nav li:hover, #top_btn:hover {
 .notice_hidden {
     display: none;
 }
-.notice {
+#tooltip {
+    position: fixed;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    pointer-events: none;
 }
-/*
-#side_bar{
+#tooltip.hidden {
+    display: none;
+}
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+#schedule table th {
+    height: 50px;
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+}
+#schedule table th:first-child {
+    width: 130px;
+}
+#schedule table th:last-child {
     width: 300px;
-    height: 500px;
-    float: right;
 }
-#chat_chat {
-    height: 400px;
-    overflow-y: scroll;
+#schedule table tr td {
+    height: 30px;
+    text-align: center;
 }
-#chat_box {
-    width: 75%;
-    float: left;
+#schedule table tr td:first-child {
+    text-align: center;
 }
-#chat_send {
-    width: 20%;
-    float: right;
+#schedule table tr td:last-child {
+    padding-left: 10px;
 }
-#contents_viewer {
-    width: calc(100% - 300px);
-    height:100%;
-    background-color: aliceblue;
-    float: left;
+#next_day td{
+    border-top: 1px solid black;
 }
-
-#time_table {
-    height: 100%;
-}
-
-#awesome_contribute {
-    height: 100%;
-}
-
-#repository_detail {
-    height: 100%;
-}
-*/

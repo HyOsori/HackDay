@@ -34,7 +34,7 @@ function showtime() {
     }
 
     var timer = document.getElementById('timer');
-    deadline = new Date(2017,11,5,9,30,0);
+    deadline = new Date("Sun Nov 05 2017 09:30:00 GMT+0900");
 
     if ((deadline.getTime() - now.getTime()) > 0) {
         var leftStr = "";
