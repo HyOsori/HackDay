@@ -16,7 +16,6 @@ class OsoriHack(tornado.web.Application):
             (r"/error", osorihack.view.ErrorHandler),
             (r"/admin", osorihack.view.AdminHandler),
 
-            (r"/repo/([^/]+)/([^/]+)", osorihack.view.SearchRepositoryHandler),
             (r"/repo", osorihack.view.SearchRepositoryHandler),
             (r"/awesome", osorihack.view.AwesomeResultHandler),
 
