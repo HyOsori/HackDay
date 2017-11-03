@@ -7,32 +7,22 @@ window.onload = function() {
 
     startclock();
     moveLine();
-
-    addNotice("이것은 첫 번째 공지사항입니다.",
-              "여름장이란 애시당초에 글러서, 해는 아직 중천에 있건만 장판은 벌써 쓸쓸하고 더운 햇발이 벌여놓은 " +
-              "전 휘장 밑으로 등줄기를 훅훅 볶는다. 마을 사람들은 거지 반 돌아간 뒤요, 팔리지 못한 나무꾼 패가" +
-              " 길거리에 궁싯거리고들 있으나 석유병이나 받고 고깃마리나 사면 족할 이 축들을 바라고 언제까지든지" +
-              " 버티고 있을 법은 없다. 춥춥스럽게 날아드는 파리 떼도 장난꾼 각다귀들도 귀치않다. 얽둑배기요 " +
-              "왼손잡이인 드팀전의 허 생원은 기어코 동업의 조 선달에게 나꾸어 보았다.");
-    addNotice("이것은 두 번째 공지사항입니다.",
-              "어린아이를 달래듯이 목덜미를 어루만져주니 나귀는 코를 벌름거리고 입을 투르르거렸다. 콧물이 " +
-              "튀었다. 허 생원은 짐승 때문에 속도 무던히는 썩였다. 아이들의 장난이 심한 눈치여서 땀 밴 몸뚱" +
-              "어리가 부들부들 떨리고 좀체 흥분이 식지 않는 모양이었다. 굴레가 벗어지고 안장도 떨어졌다. “요 " +
-              "몹쓸 자식들” 하고 허 생원은 호령을 하였으나 패들은 벌써 줄행랑을 논 뒤요 몇 남지 않은 아이들" +
-              "이 호령에 놀래 비슬비슬 멀어졌다.");
-    addNotice("이것은 세 번째 공지사항입니다.",
-              "최신 공지사항은 페이지 로드 시 자동으로 펼쳐집니다. 얍얍");
+    loadRepo();
+    loadAwesome();
 
     clickEvent.initEvent('click', true, false);
 
     if (noticeList.hasChildNodes()) {
         noticeList.childNodes[0].dispatchEvent(clickEvent);
     }
+
+    var repoRefresh = setInterval(loadRepo, 300000);
+    var awesomeRefresh = setInterval(loadAwesome, 300000);
 };
 
 console.log(window.location.host);
 
-var chatSocket = new WebSocket("wss://" + window.location.host + "/chat");
+var chatSocket = new WebSocket("wss://" + window.location.host + "/conn");
 chatSocket.onopen = function () {
     chatSendButton.onclick = function () {
         sendMessage();
@@ -75,7 +65,7 @@ function addNotice(title, content) {
 chatSocket.onmessage = function (evt) {
     var data = evt.data;
     data = JSON.parse(data);
-
+    console.log(data);
     if (data["type"] == "messsage") {
         var message = "[" + data["name"] + "] : " + data["message"];
         var appendedMessage = document.createElement("li");
@@ -90,17 +80,11 @@ chatSocket.onmessage = function (evt) {
     else if (data["type"] == "notice") {
         addNotice(data["title"], data["message"]);
     }
-
-
-
 };
 
 var chatSendButton = document.getElementById("chat_send");
 var chatBox = document.getElementById("chat_box");
 var chatChat = document.getElementById("chat_chat");
-
-var awesomeRefreshButton = document.getElementById("refresh_awesome_button");
-var repoRefreshButton = document.getElementById("refresh_repo_button");
 
 var repoDetailDiv = document.getElementById("repository_detail");
 
@@ -113,15 +97,6 @@ chatBox.onkeydown = function (event) {
         sendMessage();
     }
 }
-
-awesomeRefreshButton.onclick = function () {
-    console.log("awesome");
-};
-
-repoRefreshButton.onclick = function () {
-    console.log("repo");
-    loadRepo();
-};
 
 function loadRepo() {
     $.ajax({
