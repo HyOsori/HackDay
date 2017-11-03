@@ -85,11 +85,7 @@ chatSocket.onmessage = function (evt) {
 var chatSendButton = document.getElementById("chat_send");
 var chatBox = document.getElementById("chat_box");
 var chatChat = document.getElementById("chat_chat");
-
-var repoDetailDiv = document.getElementById("repository_detail");
-
 var myNameText = document.getElementById("my_name");
-
 var noticeList = document.getElementById("notice_list");
 
 chatBox.onkeydown = function (event) {

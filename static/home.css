@@ -202,3 +202,20 @@ nav li:hover, #top_btn:hover {
 .repo_link {
     margin-bottom: 15px;
 }
+#awesome_contributor > div {
+    padding: 10px;
+    margin: 20px 0px 60px 0px;
+    width: 300px;
+}
+#awesome_contributor > div h2 {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+#awesome_contributor > div span {
+    font-size: 20px;
+    margin-left: 10px;
+}
+#awesome_contributor > div a {
+    text-decoration: none;
+    font-size: 13px;
+}

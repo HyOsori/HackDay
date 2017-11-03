@@ -1,10 +1,50 @@
+var repoDetailDiv = document.getElementById("repository_detail");
+var awesomeContributorDiv = document.getElementById("awesome_contributor");
+var awesomeRepositoryDiv = document.getElementById("awesome_repository");
+
 function loadAwesome() {
   $.ajax({
         url: "/awesome",
         success: function (result) {
             console.log(result);
+
+            if (awesomeContributorDiv.childElementCount > 1 ) {
+              awesomeContributorDiv.removeChild(awesomeContributorDiv.lastChild);
+            }
+            if (awesomeRepositoryDiv.childElementCount > 1) {
+              awesomeRepositoryDiv.removeChild(awesomeRepositoryDiv.lastChild);
+            }
+
+            var data = JSON.parse(result);
+            var repo = data["best_commit_repo"];
+            var user = data["best_commit_contributor"];
+
+            loadBestContributor("awesome_contributor", user["name"], user["commit"], user["link"]);
+            addRepository("awesome_repository", repo["name"], repo["link"], repo["repo_size"],
+                          repo["star"], repo["commit"], repo["users"]);
         }
     });
+}
+
+function loadBestContributor(container, name, commit, link) {
+  var Container = document.getElementById(container);
+  var bestUser = document.createElement("div");
+  var userName = document.createElement("h2");
+  var commitCnt = document.createElement("span");
+  var profile = document.createElement("div");
+  var profileLink = document.createElement("a");
+
+  userName.append(document.createTextNode(name));
+  commitCnt.append(document.createTextNode(" - " + commit + " commits"));
+  profileLink.setAttribute("href", link);
+  profileLink.append(document.createTextNode("go to profile"));
+  profile.append(profileLink);
+
+  userName.append(commitCnt);
+  bestUser.append(userName);
+  bestUser.append(profile);
+
+  Container.append(bestUser);
 }
 
 function loadRepo() {
@@ -19,14 +59,15 @@ function loadRepo() {
 
             var repoDataList = JSON.parse(result);
             repoDataList.forEach(function(repo) {
-                addRepository(repo["name"], repo["link"], repo["repo_size"], repo["star"],
-                              repo["commit"], repo["users"]);
+                addRepository("repository_detail", repo["name"], repo["link"], repo["repo_size"],
+                              repo["star"], repo["commit"], repo["users"]);
             });
         }
     });
 }
 
-function addRepository(name, link, repo_size, star, commit, users) {
+function addRepository(container, name, link, repo_size, star, commit, users) {
+  var repoContainer = document.getElementById(container);
   var newRepo = document.createElement("div");
   var repoName = document.createElement("h2");
   var repoLink = document.createElement("a");
@@ -38,11 +79,11 @@ function addRepository(name, link, repo_size, star, commit, users) {
 
   var maxUserCommit = 0;
 
-  newRepo.setAttribute("id", "repo_" + name);
+  newRepo.setAttribute("id", container + name);
   newRepo.setAttribute("class", "repository");
   newRepo.style.width = "500px";
 
-  repoUserContainer.setAttribute("id", "repo_" + name + "_users");
+  repoUserContainer.setAttribute("id", container + name + "_users");
   repoUserContainer.setAttribute("class", "repo_user_container");
   
   repoCommit.setAttribute("class", "repo_total_commit");
@@ -64,20 +105,20 @@ function addRepository(name, link, repo_size, star, commit, users) {
   newRepo.append(repoCommit);
   newRepo.append(repoUserContainer);
 
-  repoDetailDiv.append(newRepo);
+  repoContainer.append(newRepo);
 
   users.forEach(function(user) { maxUserCommit = maxUserCommit < user["commit"] ? user["commit"] : maxUserCommit; });
 
   users.forEach(function(user) {
-    addUser(name, user["name"], user["commit"], user["link"], maxUserCommit);
+    addUser(container, name, user["name"], user["commit"], user["link"], maxUserCommit);
   });
 }
 
-function addUser(repo_name, name, commit, link, max_commit) {
+function addUser(container, repo_name, name, commit, link, max_commit) {
   var maxWidth = 400;
   var length = maxWidth * commit / max_commit;
 
-  var repoDiv = document.getElementById("repo_" + repo_name + "_users");
+  var repoDiv = document.getElementById(container + repo_name + "_users");
   var commitCntBar = document.createElement("div");
   var userLink = document.createElement("a");
   var linkContainer = document.createElement("div");
