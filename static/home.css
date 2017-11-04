@@ -34,8 +34,7 @@ nav li {
     border-radius: 10px;
     padding: 10px 20px;
     background-color: rgba(0,0,0,0.1);
-    text-decoration: none;
-    color: black;
+    cursor: pointer;
 }
 nav li:hover, #top_btn:hover {
     background-color: rgba(0,0,0,0.05);
@@ -68,17 +67,24 @@ nav li:hover, #top_btn:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    height: 500px;
+    height: 300px;
     background-color: rgba(0,0,0,0.1);
     padding: 10px;
 }
+#chat_container input {
+    width: 265px;
+}
 #chat_chat {
-    height: 450px;
+    height: 250px;
     margin-bottom: 7px;
     background-color: rgba(255,255,255,0.5);
     padding: 10px;
-    max-width: 203px;
+    width: 300px;
     overflow-y: scroll;
+}
+#chat_chat p {
+    margin: 0px;
+    font-size: 13px;
 }
 #chat_chat li {
     list-style: none;
@@ -155,4 +161,63 @@ nav li:hover, #top_btn:hover {
 }
 #next_day td{
     border-top: 1px solid black;
+}
+.commit_cnt_bar {
+    background-color: #69F0AE;
+    white-space: nowrap;
+    padding: 5px 10px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+.commit_cnt_bar:first-child {
+    margin-top: 0px;
+}
+.repository {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 20px 0px;
+}
+.repository h2 {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+.repository a {
+    text-decoration: none;
+}
+.repository a {
+    font-size: 13px;
+}
+.repository span {
+    margin-right: 15px;
+    font-weight: bold;
+}
+.repo_user_container {
+    margin-top: 5px;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 10px;
+}
+.repo_total_commit {
+    margin-top: 3px;
+    font-weight: bold;
+}
+.repo_link {
+    margin-bottom: 15px;
+}
+#awesome_contributor > div {
+    padding: 10px;
+    margin: 20px 0px 60px 0px;
+    width: 300px;
+}
+#awesome_contributor > div h2 {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+#awesome_contributor > div span {
+    font-size: 20px;
+    margin-left: 10px;
+}
+#awesome_contributor > div a {
+    text-decoration: none;
+    font-size: 13px;
 }
