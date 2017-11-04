@@ -24,9 +24,20 @@ console.log(window.location.host);
 
 var chatSocket = new WebSocket("wss://" + window.location.host + "/conn");
 chatSocket.onopen = function () {
+    var appendedMessage = document.createElement("p");
+    appendedMessage.appendChild(document.createTextNode("연결되었습니다."));
+    chatChat.appendChild(appendedMessage);
+    chatChat.scrollTop = chatChat.scrollHeight;
+
     chatSendButton.onclick = function () {
         sendMessage();
     }
+};
+chatSocket.onclose = function () {
+    var appendedMessage = document.createElement("p");
+    appendedMessage.appendChild(document.createTextNode("연결이 끊어졌습니다. 새로고침을 해주세요."));
+    chatChat.appendChild(appendedMessage);
+    chatChat.scrollTop = chatChat.scrollHeight;
 };
 
 function sendMessage() {
@@ -85,49 +96,11 @@ chatSocket.onmessage = function (evt) {
 var chatSendButton = document.getElementById("chat_send");
 var chatBox = document.getElementById("chat_box");
 var chatChat = document.getElementById("chat_chat");
-
-var repoDetailDiv = document.getElementById("repository_detail");
-
 var myNameText = document.getElementById("my_name");
-
 var noticeList = document.getElementById("notice_list");
 
 chatBox.onkeydown = function (event) {
     if (event.keyCode == 13) {
         sendMessage();
     }
-}
-
-function loadRepo() {
-    $.ajax({
-        url: "/repo",
-        success: function (result) {
-            console.log(result);
-            var repoDetailHtml = "";
-            var repoDataList = JSON.parse(result);
-            for (var i = 0; i < repoDataList.length; i++) {
-                var repoData = repoDataList[i];
-                var totalCommit = 0;
-                repoDetailHtml += "<a href=" + "\""+ repoData["link"] + "\"" + ">" + "<h2>" + repoData["name"] + "</h2>" + "</a>";
-                repoDetailHtml += "code size: " + String(repoData["repo_size"]) + "KB" + "<br>";
-                repoDetailHtml += "star: " + String(repoData["star"]) + "★" + "<br><br>";
-                for (var j = 0; j < repoData["users"].length; j++) {
-                    var userData = repoData["users"][j];
-                    console.log(userData);
-                    totalCommit += userData["commit"];
-                    repoDetailHtml += "<a href=" + "\""+ userData["link"] + "\"" + ">" + userData["name"] + "</a>";
-                    repoDetailHtml += ": ";
-                    for (var k = 0; k < userData.commit; k++) {
-                        repoDetailHtml += "★"
-                    }
-                    repoDetailHtml += "<br>"
-                    repoDetailHtml += String(userData.commit) + "commit";
-                    repoDetailHtml += "<br>";
-                }
-                repoDetailHtml += "<h4>" + "total Commit: " +  String(totalCommit) + "commit" + "</h4>";
-                repoDetailHtml += "<br>"
-            }
-            repoDetailDiv.innerHTML = repoDetailHtml
-        }
-    });
 }

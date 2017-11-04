@@ -10,7 +10,7 @@ import osorihack.githubhelper
 from osorihack.model.repository import Repository, Contributor, Notice
 
 USER_COOKIE = "happyhackday"
-EXPIRED_TIME = 60 * 5
+EXPIRED_TIME = 60 * 10
 
 cached_data = {"time": 0, "repo_data": None, "awesome_data": None, "managed_info": None}
 
