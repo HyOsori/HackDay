@@ -3,7 +3,7 @@ from tornado import gen, httpclient
 BASE_GITHUB_URL = "https://api.github.com/"
 
 @gen.coroutine
-def get_contributors(owner, repo_name):
+def get_contributors(owner, repo_name, token=None):
     '''
     Get information about
     repositories contributor
@@ -19,13 +19,15 @@ def get_contributors(owner, repo_name):
     print(owner, repo_name, url)
 
     request = httpclient.HTTPRequest(url, method='GET')
-    request.user_agent = 'request'
+    request.user_agent = 'osori-hackday'
+    if token is not None:
+        request.headers["Authorization"] = "token " + token
     response = yield httpclient.AsyncHTTPClient().fetch(request)
 
     return response
 
 @gen.coroutine
-def get_repository(owner, repo_name):
+def get_repository(owner, repo_name, token=None):
     '''
     Get information about overview of repo
     number of issues, pull requests and etc ..
@@ -46,6 +48,8 @@ def get_repository(owner, repo_name):
 
     request = httpclient.HTTPRequest(url, method='GET')
     request.user_agent = 'request'
+    if token is not None:
+        request.headers["Authorization"] = "token " + token
     response = yield httpclient.AsyncHTTPClient().fetch(request)
 
     return response

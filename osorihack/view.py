@@ -94,7 +94,7 @@ class AwesomeResultHandler(BaseHandler):
             self.write(cached_data["awesome_data"])
             return
 
-        yield refresh_information(self.application.managed_info)
+        yield refresh_information(self.application.managed_info, self.settings["github_token"])
         self.write(cached_data["awesome_data"])
 
 
@@ -106,7 +106,7 @@ class SearchRepositoryHandler(BaseHandler):
             self.write(cached_data["repo_data"])
             return
 
-        yield refresh_information(self.application.managed_info)
+        yield refresh_information(self.application.managed_info, self.settings["github_token"])
         self.write(cached_data["repo_data"])
 
 
@@ -114,7 +114,7 @@ refreshing = False
 
 
 @tornado.gen.coroutine
-def refresh_information(managed_repo):
+def refresh_information(managed_repo, token=None):
     global refreshing
 
     refreshing = True
@@ -124,12 +124,12 @@ def refresh_information(managed_repo):
     best_contributor = None
 
     for managed_info in managed_repo:
-        repo_response = yield osorihack.githubhelper.get_repository(managed_info.owner, managed_info.repo_name)
+        repo_response = yield osorihack.githubhelper.get_repository(managed_info.owner, managed_info.repo_name, token)
         repo_info = json.loads(repo_response.body.decode())
         repo_size = repo_info["size"]
         repo_star = repo_info["stargazers_count"]
 
-        contributor_response = yield osorihack.githubhelper.get_contributors(managed_info.owner, managed_info.repo_name)
+        contributor_response = yield osorihack.githubhelper.get_contributors(managed_info.owner, managed_info.repo_name, token)
         total_commit = 0
 
         contributor_group = list()
