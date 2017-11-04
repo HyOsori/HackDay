@@ -27,7 +27,8 @@ class OsoriHack(tornado.web.Application):
             template_path=os.path.join(os.getcwd(), "templates"),
             static_path=os.path.join(os.getcwd(), "static"),
             cookie_secret="osorihackday",
-            auth_key="qwerty",
+            auth_key="your_auth_key",
+            github_token="your_github_token",
             debug=True,
         )
 
