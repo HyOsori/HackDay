@@ -4,6 +4,12 @@ HackDay website easy build
 
 ## How to run
 
+Environment setting
+```bash
+pip install tornado
+npm install angular
+```
+
 Develop server run
 
 ```bash
