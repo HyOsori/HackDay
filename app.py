@@ -1,23 +1,38 @@
-import functools
+import tornado.ioloop
 
-from tornado.ioloop import IOLoop
-from tornado.options import define, options, parse_command_line
-from osorihack import app
-from osorihack.view import refresh_information
 
-define("port", default=5000, help="run on the given port", type=int)
+PORT = 8000
 
 
 def run():
-    parse_command_line()
+    tornado.ioloop.IOLoop.instance().start()
 
-    print("initialize cache data")
-    cache_initialize_func = functools.partial(refresh_information, app.managed_info, app.settings["github_token"])
-    IOLoop.instance().run_sync(cache_initialize_func)
 
-    print("start server")
-    app.listen(options.port)
-    IOLoop.instance().start()
+def dev_prepare():
+    import re
+    import os
+    import engine
 
-if __name__ == "__main__":
+    source_path = os.path.join(os.getcwd(), 'dist/index.html')
+    target_path = os.path.join(os.getcwd(), 'dist/index_dev.html')
+
+    js_list = ['runtime.js', 'polyfills.js', 'styles.js', 'vendor.js', 'main.js']
+    with open(source_path, 'r') as f:
+        dev_file = open(target_path, '+w')
+
+        while True:
+            line = f.readline()
+            if not line:
+                break
+
+            for j in js_list:
+                line = line.replace(j, '{{ static_url(\"%s\") }}' % j)
+            dev_file.write(line)
+                
+        dev_file.close()
+    engine.app.listen(PORT)
+    
+
+if __name__ == "__main__":    
+    dev_prepare()
     run()

@@ -1,4 +1,0 @@
-junsulime AndroidStudy
-hyosori Equalizer
-hyosori osori-hackday
-kimjieun02 HackDayRepoRefreshTest
