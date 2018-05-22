@@ -6,8 +6,8 @@ HackDay website easy build
 
 Environment setting
 ```bash
-pip install tornado
-npm install angular
+pip install -r requirements.txt
+npm install
 ```
 
 Develop server run
