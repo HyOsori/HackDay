@@ -9,7 +9,7 @@ See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-This project uses some node modules so we recommend to install[npm](https://www.npmjs.com/get-npm).
+This project uses some node modules so we recommend to install [npm](https://www.npmjs.com/get-npm).
 
 You can check that you have npm installed with this command.
 
@@ -19,7 +19,7 @@ npm -v
 
 ### Installing
 
-All you need is in[requirements.txt](https://github.com/HyOsori/HackDay/blob/develop/requirements.txt).   
+All you need is in [requirements.txt](https://github.com/HyOsori/HackDay/blob/develop/requirements.txt).   
  
 If pip installed, you can set environment like this.
 ```
