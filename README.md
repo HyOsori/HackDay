@@ -5,7 +5,6 @@ Hack day website easy to build
 ## Getting Started
  
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.    
-See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -16,6 +15,8 @@ You can check that you have npm installed with this command.
 ```
 npm -v
 ```
+
+You need **Python 3.5** or later to run this project.
 
 ### Installing
 
@@ -41,22 +42,6 @@ $ ng build
 $ python app.py
 ```
 
-### Break down into end to end tests
-
-
-```
-
-```
-
-### And coding style tests
-
-
-```
-
-```
-
-## Deployment
-
 
 
 ## Built With
@@ -66,11 +51,8 @@ $ python app.py
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/HyOsori/HackDay/blob/develop/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
- 
 
 ## Authors
 
@@ -81,7 +63,7 @@ See also the list of [contributors](https://github.com/HyOsori/HackDay/graphs/co
 
 ## License
 
-This project is licensed under the xxx License - see the [LICENSE.md]() file for details
+This project is licensed under the MIT License - see the [LICENSE]() file for details
 
 ## Acknowledgments
 
