@@ -1,7 +1,7 @@
 ### Environment
 
-현재 개발 환경을 적어주세요.
+Describe your develop environment.
 
 ### Description
 
-Issue 사항에 대해 적어주세요.
+Write down your issue.
